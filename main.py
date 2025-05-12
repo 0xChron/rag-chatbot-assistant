@@ -1,11 +1,15 @@
 import os
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
+
+# Testing modules
+import config
+from prompt_builder import PromptBuilder
+from vector_store import VectorStore
 
 load_dotenv()
 
-MODEL_NAME = "gemini-2.0-flash"
-TEMPERATURE = 0.2
 
 class GoogleLLM:
     def __init__(self, model_name: str, temperature: float):
@@ -19,8 +23,19 @@ class GoogleLLM:
 
 
 def main():
-    chatbot = GoogleLLM(model_name=MODEL_NAME, temperature=TEMPERATURE)
-    response = chatbot.invoke("What is the capital of the Philippines?")
+    embeddings = GoogleGenerativeAIEmbeddings(model=config.EMBEDDING_MODEL)
+    chatbot = GoogleLLM(model_name=config.LLM_MODEL, temperature=config.LLM_TEMPERATURE)
+
+    vector_store = VectorStore(embeddings=embeddings, 
+                            collection_name=config.COLLECTION_NAME, 
+                            connection_string=config.CONNECTION_STRING)
+    
+    question = "What is the course code of the subjects?"
+
+    prompt = PromptBuilder(question=question, 
+                           documents=vector_store.retrieve_documents(question=question)).format_prompt()
+    print(prompt)
+    response = chatbot.invoke(prompt)
     print(response.content)
 
 if __name__ == "__main__":

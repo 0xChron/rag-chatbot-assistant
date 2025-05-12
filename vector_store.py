@@ -26,6 +26,4 @@ class VectorStore:
 
     def retrieve_documents(self, question: str, k: int = 5) -> List[Document]:
         retriever = self.store.as_retriever(search_kwargs={"k": k})
-        return retriever.get_relevant_documents(question)
-    
-
+        return retriever.invoke(question)

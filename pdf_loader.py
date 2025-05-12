@@ -17,6 +17,4 @@ class PDFLoader:
                 docs = PyPDFLoader(os.path.join(self.filepath, file)).load()
                 print(f"Loader {file} with {len(docs)} pages.")
                 all_docs.extend(docs)
-        
         return all_docs
-    
