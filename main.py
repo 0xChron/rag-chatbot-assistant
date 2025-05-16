@@ -30,18 +30,22 @@ class GoogleLLM:
 def main():
     embeddings = GoogleGenerativeAIEmbeddings(model=config.EMBEDDING_MODEL)
     chatbot = GoogleLLM(model_name=config.LLM_MODEL, temperature=config.LLM_TEMPERATURE)
-
     vector_store = VectorStore(embeddings=embeddings, 
                             collection_name=config.COLLECTION_NAME, 
                             connection_string=config.CONNECTION_STRING)
     
-    question = "What is the course code of the subjects?"
+    while True:
+        question = input("User (type 'exit' to quit): ")
+        if question.lower() == 'exit':
+            break
 
-    prompt = PromptBuilder(question=question, 
-                           documents=vector_store.retrieve_documents(question=question)).format_prompt()
-    print(prompt)
-    response = chatbot.invoke(prompt)
-    print(response.content)
+        prompt = PromptBuilder(
+            question=question,
+            documents=vector_store.retrieve_documents(question=question)
+        ).format_prompt()
+
+        response = chatbot.invoke(prompt)
+        logger.info(f"AI: {response.content}")
 
 if __name__ == "__main__":
     logger.info("starting app")

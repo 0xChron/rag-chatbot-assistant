@@ -1,9 +1,13 @@
+import logging
 from typing import List, Any
 from langchain_postgres import PGVector
 from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_core.documents import Document
 
 from pdf_loader import PDFLoader
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 class VectorStore:
     def __init__(self, embeddings: Any, collection_name: str, connection_string: str):
@@ -23,6 +27,7 @@ class VectorStore:
                 split_docs.extend([Document(page_content=chunk, metadata=doc.metadata) for chunk in chunks])
             self.store.add_documents(split_docs)
         except Exception as e:
+            logger.error(f"Error in add_documents: {e}")
             raise RuntimeError(f"Error in add_documents: {e}")
 
     def retrieve_documents(self, question: str, k: int = 5) -> List[Document]:
@@ -30,4 +35,5 @@ class VectorStore:
             retriever = self.store.as_retriever(search_kwargs={"k": k})
             return retriever.invoke(question)
         except Exception as e:
+            logger.error(f"Error in retrieve_documents: {e}")
             raise RuntimeError(f"Error in retrieve_documents: {e}")
