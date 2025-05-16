@@ -23,7 +23,10 @@ class VectorStore:
             for doc in documents:
                 chunks = splitter.split_text(doc.page_content)
                 split_docs.extend([Document(page_content=chunk, metadata=doc.metadata) for chunk in chunks])
+            logger.info(f"Splitted into {len(split_docs)} chunks total.")
+
             self.store.add_documents(split_docs)
+            logger.info("Documents succsesfully added to vector store.")
         except Exception as e:
             logger.error(f"Error in add_documents: {e}")
             raise RuntimeError(f"Error in add_documents: {e}")

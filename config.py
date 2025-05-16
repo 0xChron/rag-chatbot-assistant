@@ -3,6 +3,9 @@ from dotenv import load_dotenv
 
 load_dotenv(override=True)
 
+# Data source configuration
+FILEPATH = os.getenv("FILEPATH", "data")
+
 # LLM configuration
 LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.0-flash")
 LLM_TEMPERATURE = 0.2
