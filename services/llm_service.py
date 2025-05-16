@@ -18,9 +18,10 @@ class LLMService:
             logger.error(f"Error initializing Google LLM: {e}")
             raise RuntimeError(f"Error initializing Google LLM: {e}")
     
-    def invoke(self, question: str):
+    def invoke(self, question: str) -> str:
         try:
-            return self.llm.invoke(question)
+            answer = self.llm.invoke(question)
+            return answer.content
         except Exception as e:
             logger.error(f"Error invoking LLM: {e}")
             raise RuntimeError(f"Error invoking LLM: {e}")

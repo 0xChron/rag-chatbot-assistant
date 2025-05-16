@@ -29,8 +29,8 @@ def app():
             documents=vector_store.retrieve_documents(question=question)
         ).format_prompt()
 
-        response = chatbot.invoke(prompt)
-        logger.info(f"AI: {response.content}")
+        answer = chatbot.invoke(prompt)
+        logger.info(f"AI: {answer}")
 
 if __name__ == "__main__":
     app()
