@@ -15,15 +15,19 @@ class VectorStore:
 
 
     def add_documents(self, documents: List[Document], chunk_size: int = 1000, chunk_overlap: int = 100) -> None:
-        splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap) 
-        
-        split_docs = []
-        for doc in documents:
-            chunks = splitter.split_text(doc.page_content)
-            split_docs.extend([Document(page_content=chunk, metadata=doc.metadata) for chunk in chunks])
-        self.store.add_documents(split_docs)
-
+        try:
+            splitter = RecursiveCharacterTextSplitter(chunk_size=chunk_size, chunk_overlap=chunk_overlap) 
+            split_docs = []
+            for doc in documents:
+                chunks = splitter.split_text(doc.page_content)
+                split_docs.extend([Document(page_content=chunk, metadata=doc.metadata) for chunk in chunks])
+            self.store.add_documents(split_docs)
+        except Exception as e:
+            raise RuntimeError(f"Error in add_documents: {e}")
 
     def retrieve_documents(self, question: str, k: int = 5) -> List[Document]:
-        retriever = self.store.as_retriever(search_kwargs={"k": k})
-        return retriever.invoke(question)
+        try:
+            retriever = self.store.as_retriever(search_kwargs={"k": k})
+            return retriever.invoke(question)
+        except Exception as e:
+            raise RuntimeError(f"Error in retrieve_documents: {e}")

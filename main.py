@@ -1,4 +1,5 @@
 import os
+import logging
 from dotenv import load_dotenv
 from langchain_google_genai import ChatGoogleGenerativeAI
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
@@ -8,7 +9,11 @@ import config
 from prompt_builder import PromptBuilder
 from vector_store import VectorStore
 
+# Setup
 load_dotenv()
+
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
 
 
 class GoogleLLM:
@@ -39,4 +44,5 @@ def main():
     print(response.content)
 
 if __name__ == "__main__":
+    logger.info("starting app")
     main()

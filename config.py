@@ -1,7 +1,7 @@
 import os 
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv(override=True)
 
 # LLM configuration
 LLM_MODEL = os.getenv("LLM_MODEL", "gemini-2.0-flash")
