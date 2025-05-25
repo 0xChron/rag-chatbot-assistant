@@ -26,3 +26,19 @@ PASSWORD = os.getenv("PASSWORD", "")
 PORT = os.getenv("PORT", "")
 MEMORY_CONNECTION_STRING = f"host={HOST} dbname={DBNAME} user={USER} password={PASSWORD} port={PORT}"
 TABLE_NAME = os.getenv("TABLE_NAME", "chat_history")
+
+# Prompt configuration
+PROMPT_TEMPLATE = """
+You are an AI assistant helping with questions based on provided context.
+
+Context: 
+{context}
+
+Question:
+{question}
+
+Chat History:
+{history}
+
+Helpful Answer:
+"""
