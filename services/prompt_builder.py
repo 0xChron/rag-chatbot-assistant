@@ -3,9 +3,10 @@ from langchain_core.documents import Document
 from typing import List
 
 class PromptBuilder:
-    def __init__(self, question: str, documents: List[Document]):
+    def __init__(self, question: str, documents: List[Document], history: str = ""):
         self.question = question
         self.documents = documents
+        self.history = history
 
 
     def format_prompt(self) -> str:
@@ -20,8 +21,11 @@ class PromptBuilder:
             
             Question:
             {question}
+
+            Chat History:
+            {history}
             
             Helpful Answer:
             """
         )
-        return prompt.format(context=context, question=self.question)
+        return prompt.format(context=context, question=self.question, history=self.history)

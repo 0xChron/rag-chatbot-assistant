@@ -17,3 +17,12 @@ EMBEDDING_MODEL = os.getenv("EMBEDDING_MODEL", "models/gemini-embedding-exp-03-0
 # Database configuration 
 CONNECTION_STRING = os.getenv("CONNECTION_STRING", "")
 COLLECTION_NAME = os.getenv("COLLECTION_NAME", "test_collection")
+
+# Memory configuration
+HOST = os.getenv("HOST", "")
+DBNAME = os.getenv("DBNAME", "")
+USER = os.getenv("USER", "")
+PASSWORD = os.getenv("PASSWORD", "")
+PORT = os.getenv("PORT", "")
+MEMORY_CONNECTION_STRING = f"host={HOST} dbname={DBNAME} user={USER} password={PASSWORD} port={PORT}"
+TABLE_NAME = os.getenv("TABLE_NAME", "chat_history")
