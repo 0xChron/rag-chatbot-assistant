@@ -6,13 +6,6 @@ from langchain_postgres import PostgresChatMessageHistory
 import config
 import psycopg
 
-
-# need mag generate ng uuid
-###
-import uuid
-session_id = str(uuid.uuid4())
-TABLE_NAME = "chat_history"
-
 class MemoryService:
     def __init__(self, connection_string: str, session_id: str, table_name: str, k: int = 5):
         self.connection = psycopg.connect(connection_string)
