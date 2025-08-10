@@ -15,13 +15,19 @@ A starter template for a Retrieval-Augmented Generation (RAG) chatbot that lever
 git clone https://github.com/aaroncanillas/rag-chatbot-assistant.git
 cd rag-chatbot-assistant
 ```
-2. Create and activate a virtual environment (recommended):
+
+2. Create .env file and input your own configuration
+```
+cp .env.sample .env
+```
+
+3. Create and activate a virtual environment (recommended):
 ```
 python -m venv venv
 source venv/bin/activate    # On Windows use `venv\Scripts\activate`
 ```
 
-3. Install dependencies:
+4. Install dependencies:
 ```
 pip install -r requirements.txt
 ```
