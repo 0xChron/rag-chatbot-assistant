@@ -1,6 +1,6 @@
 # RAG AI Chatbot
 
-A starter template for a Retrieval-Augmented Generation (RAG) chatbot that leverages PDF files as its primary knowledge source. Designed for easy setup, customization, and future expansion.
+A starter template for a Retrieval-Augmented Generation (RAG) chatbot that leverages PDF files as its primary knowledge source. Designed for easy setup, customization, and future expansion. Click the `Use this template` button on the upper right corner of this repository to use this sample template.
 
 ## Table of Contents
 - [Installation](#installation)
@@ -16,7 +16,7 @@ git clone https://github.com/aaroncanillas/rag-chatbot-assistant.git
 cd rag-chatbot-assistant
 ```
 
-2. Create .env file and input your own configuration
+2. Create .env file and input your own configuration:
 ```
 cp .env.sample .env
 ```
