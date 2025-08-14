@@ -12,7 +12,7 @@ A starter template for a Retrieval-Augmented Generation (RAG) chatbot that lever
 ## Installation
 1. Clone the repo:
 ```
-git clone https://github.com/aaroncanillas/rag-chatbot-assistant.git
+git clone https://github.com/0xChron/rag-chatbot-assistant.git
 cd rag-chatbot-assistant
 ```
 
